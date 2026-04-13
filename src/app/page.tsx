@@ -34,10 +34,13 @@ export default function Home() {
       });
       
       const analysisData = await res.json();
-      if (analysisData.error) throw new Error(analysisData.error);
+      if (analysisData.error) {
+        throw new Error(analysisData.details || analysisData.error);
+      }
       
       setAnalysis(analysisData);
     } catch (err: any) {
+      console.error('Fetch error:', err);
       setError(err.message || 'Something went wrong');
       setIsLoading(false);
     } finally {

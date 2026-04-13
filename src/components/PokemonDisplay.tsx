@@ -10,59 +10,65 @@ interface PokemonDisplayProps {
 export default function PokemonDisplay({ data }: PokemonDisplayProps) {
   return (
     <motion.div 
-      initial={{ opacity: 0, x: -20 }}
+      initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
-      className="glass-card"
+      className="anime-card"
     >
-      <div style={{ textAlign: 'center' }}>
-        <img 
-          src={data.sprite} 
-          alt={data.name} 
-          style={{ width: '250px', height: '250px', objectFit: 'contain', filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.2))' }} 
-        />
-        <h2 style={{ fontSize: '2rem', marginTop: '1rem', color: 'var(--accent)' }}>
-          #{data.id} {data.name}
+      <div style={{ position: 'absolute', top: 0, right: 0, background: 'var(--accent-blue)', color: 'white', padding: '5px 15px', fontWeight: 'bold' }}>
+        BIO-SCAN COMPLETE
+      </div>
+      
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <div style={{ display: 'inline-block', border: '4px solid black', padding: '20px', background: '#f0f0f0', boxShadow: '5px 5px 0px var(--accent-blue)' }}>
+          <img 
+            src={data.sprite} 
+            alt={data.name} 
+            style={{ width: '200px', height: '200px', objectFit: 'contain' }} 
+          />
+        </div>
+        <h2 style={{ fontSize: '2.5rem', marginTop: '1.5rem', color: 'black' }}>
+           {data.name} <span style={{ fontSize: '1rem', verticalAlign: 'middle', opacity: 0.5 }}>#{data.id}</span>
         </h2>
         <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginTop: '0.5rem' }}>
           {data.types.map(type => (
-            <span key={type} className="type-badge" style={{ 
-              background: 'var(--glass)', 
-              padding: '0.3rem 0.8rem', 
-              borderRadius: '20px',
-              fontSize: '0.8rem',
-              border: '1px solid var(--card-border)'
-            }}>
+            <span key={type} className="type-badge">
               {type}
             </span>
           ))}
         </div>
       </div>
 
-      <div style={{ marginTop: '2rem' }}>
-        <h3 style={{ fontSize: '1rem', marginBottom: '1rem' }}>Base Stats</h3>
+      <div style={{ padding: '1rem', background: '#f9f9f9', border: '2px dashed #000' }}>
+        <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>Vulnerability Report</h3>
         {data.stats.map(stat => (
-          <div key={stat.name} style={{ marginBottom: '0.8rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.3rem' }}>
-              <span style={{ textTransform: 'uppercase', opacity: 0.7 }}>{stat.name}</span>
+          <div key={stat.name} style={{ marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '0.9rem' }}>
+              <span style={{ textTransform: 'uppercase' }}>{stat.name}</span>
               <span>{stat.value}</span>
             </div>
-            <div style={{ height: '6px', background: 'var(--glass)', borderRadius: '3px', overflow: 'hidden' }}>
+            <div className="stat-bar-container">
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${(stat.value / 255) * 100}%` }}
-                transition={{ duration: 1, ease: 'easeOut' }}
-                style={{ height: '100%', background: 'var(--accent)' }}
+                transition={{ duration: 1, ease: 'backOut' }}
+                className="stat-bar"
+                style={{ background: stat.value > 100 ? 'var(--accent-blue)' : 'var(--accent-green)' }}
               />
             </div>
           </div>
         ))}
       </div>
 
-      <div style={{ marginTop: '2rem' }}>
-        <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Evolution</h3>
-        <p style={{ opacity: 0.8, fontSize: '0.9rem' }}>
-          {data.evolution_chain?.join(' → ')}
-        </p>
+      <div style={{ marginTop: '1.5rem', borderTop: '4px solid black', paddingTop: '1rem' }}>
+        <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Evolutionary Path</h3>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {data.evolution_chain?.map((name, i) => (
+            <span key={name} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontWeight: 'bold', textDecoration: name === data.name ? 'underline' : 'none' }}>{name}</span>
+              {i < (data.evolution_chain?.length || 0) - 1 && <span>»</span>}
+            </span>
+          ))}
+        </div>
       </div>
     </motion.div>
   );
