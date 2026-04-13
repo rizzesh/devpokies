@@ -44,7 +44,7 @@ export default function SearchHero({ onSearch, isLoading }: SearchHeroProps) {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="ENTER SUBJECT NAME..."
+          placeholder="ENTER POKEMON NAME..."
           className="input"
           style={{ background: '#111', color: 'var(--accent-green)', borderColor: 'var(--accent-green)', fontFamily: 'monospace' }}
           disabled={isLoading}
