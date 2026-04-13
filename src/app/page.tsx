@@ -27,21 +27,33 @@ export default function Home() {
 
       // Start AI analysis
       setIsAnalyzing(true);
-      const res = await fetch('/api/analyze', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      
-      const analysisData = await res.json();
-      if (analysisData.error) {
-        throw new Error(analysisData.details || analysisData.error);
+      try {
+        const res = await fetch('/api/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        
+        const analysisData = await res.json();
+        if (analysisData.error) {
+          throw new Error(analysisData.details || analysisData.error);
+        }
+        setAnalysis(analysisData);
+      } catch (aiErr: any) {
+        console.error('AI Analysis failed:', aiErr);
+        setAnalysis({ 
+          roast: "My analysis systems are jammed! This Pokemon is so pathetic it broke my brain.", 
+          proTip: "Try connecting to a stable network before I roast you too.", 
+          prediction: "A glitch in the matrix." 
+        });
       }
-      
-      setAnalysis(analysisData);
     } catch (err: any) {
-      console.error('Fetch error:', err);
-      setError(err.message || 'Something went wrong');
+      console.error('Pokemon fetch error:', err);
+      if (err.message === 'Failed to fetch') {
+        setError('Network Error: I cannot reach the Pokemon database. Check your internet connection!');
+      } else {
+        setError(err.message || 'The subject escaped! (Something went wrong)');
+      }
       setIsLoading(false);
     } finally {
       setIsAnalyzing(false);
