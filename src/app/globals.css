@@ -17,10 +17,12 @@
 }
 
 body {
-  background: var(--background);
-  background-image: 
-    radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 25%),
-    radial-gradient(circle at 80% 80%, rgba(0, 85, 255, 0.1) 0%, transparent 25%);
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url('/bg.png');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
   color: var(--foreground);
   font-family: 'Outfit', sans-serif;
   min-height: 100vh;
