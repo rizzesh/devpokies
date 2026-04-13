@@ -3,7 +3,7 @@
 Welcome to **PokeRoaster**, the Pokedex that doesn't just give you stats—it gives you attitude. Built for the 60-minute FOSS Weekend Hackathon, this app uses the blazing speed of **Groq LPU** to analyze Pokemon data and deliver sarcastic roasts along with strategic battle insights.
 
 ## 🚀 Experience the Roasts
-[Insert Live Link Here - e.g., Vercel Deployment]
+(https://pokies-bay.vercel.app/)
 
 ## 🧠 The "Intelligence" Behind the App
 PokeRoaster leverages **Groq's Llama-3-70b-versatile** model to transform raw JSON data from the **PokeAPI** into a dynamic user experience.
@@ -41,4 +41,4 @@ PokeRoaster leverages **Groq's Llama-3-70b-versatile** model to transform raw JS
 - **Commit History**: Multi-step, logical commit history provided.
 
 ---
-*Built with ❤️ for the FOSS Weekend Community.*
+*Built with ❤️ for the Frontend sprint.*
