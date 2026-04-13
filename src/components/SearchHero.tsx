@@ -49,6 +49,9 @@ export default function SearchHero({ onSearch, isLoading }: SearchHeroProps) {
           style={{ background: '#111', color: 'var(--accent-green)', borderColor: 'var(--accent-green)', fontFamily: 'monospace' }}
           disabled={isLoading}
         />
+        <p style={{ color: 'var(--accent-green)', fontSize: '0.8rem', marginBottom: '0.5rem', fontFamily: 'monospace', fontWeight: 'bold' }}>
+          COLRESS WILL ANALYSE YOUR POKEMON (HIS PLAY THING 😈)
+        </p>
         <button 
           type="submit" 
           className="btn" 
