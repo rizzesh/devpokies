@@ -6,12 +6,14 @@ export async function POST(request: Request) {
     const pokemonData = await request.json();
     console.log('Analyzing Pokemon:', pokemonData.name);
     
+    const apiKey = process.env.GROQ_API_KEY || process.env.NEXT_PUBLIC_GROQ_API_KEY;
+    
     // Check if API key is present
-    if (!process.env.NEXT_PUBLIC_GROQ_API_KEY) {
-      console.error('MISSING API KEY: NEXT_PUBLIC_GROQ_API_KEY is not defined');
+    if (!apiKey) {
+      console.error('MISSING API KEY: Environment variable is not defined');
       return NextResponse.json({ 
         error: 'Configuration Error', 
-        details: 'Groq API Key is missing. Check your .env.local file.' 
+        details: 'Groq API Key is missing. Try RESTARTING your dev server (npm run dev) to load the .env.local file changes!' 
       }, { status: 500 });
     }
 
